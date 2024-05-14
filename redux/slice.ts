@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 interface Product {
   _id: string;
@@ -46,6 +45,14 @@ export const cartSlice = createSlice({
       },
     },
   });
+
+  export const selectTotalAmount = createSelector(
+    (state: { cart: CartState }) => state.cart.items,
+    (items) =>
+      items.reduce((total, item) => {
+        return total + item.price * (item.quantity || 1);
+      }, 0)
+  );
   
 
 export const { addToCart, removeFromCart, updateQuantity } = cartSlice.actions;

@@ -1,5 +1,7 @@
 "use client"
+import AdminNav from '@/components/admin/AdminNav';
 import { useEdgeStore } from '@/lib/edgestore';
+import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -11,6 +13,7 @@ const Page = () => {
   const [file, setFile] = React.useState<File>();
 
   const { edgestore } = useEdgeStore();
+  const {userId} = useAuth();
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -58,7 +61,15 @@ const Page = () => {
     }
   };
 
+  if(userId != process.env.NEXT_PUBLIC_ADMIN_ID){
+    return(
+        <div className='flex items-center justify-center w-full h-screen font-bold text-2xl'>Not authorised!</div>
+    )
+}
+
   return (
+    <div className='flex items-center justify-center'>
+      <AdminNav/>
     <div className='flex items-center justify-center w-full h-screen'>
       <form className='flex flex-col items-center justify-center p-4 rounded shadow-md bg-white gap-3' onSubmit={handleSubmit}>
         <input
@@ -88,6 +99,7 @@ const Page = () => {
         <input type="file" name="image" id="image" onChange={handleImageChange} />
         <button className='font-bold rounded mt-7 hover:shadow px-3 py-2 bg-black text-white' type="submit">Submit</button>
       </form>
+    </div>
     </div>
   );
 };

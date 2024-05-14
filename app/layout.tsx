@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast"
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import ChildrenWrapper from "@/components/ChildrenWrapper";
+import Footer from "@/components/Footer";
 
 
 const inter = Jost({ subsets: ["latin"] });
@@ -27,18 +28,19 @@ export default function RootLayout({
       <body className={inter.className}>
         <ClerkProvider>
           <EdgeStoreProvider>
-            <Navbar />
             <Toaster
               position="top-right"
               reverseOrder={false}
             />
-            
+
             <ChildrenWrapper>
+              <Navbar />
               {children}
+              <Footer/>
             </ChildrenWrapper>
-            
-            
-            
+
+
+
           </EdgeStoreProvider>
         </ClerkProvider>
       </body>
