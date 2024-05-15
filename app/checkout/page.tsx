@@ -1,34 +1,36 @@
 "use client"
-import { checkoutCredits } from '@/actions/checkout.actions';
-import { selectTotalAmount } from '@/redux/slice';
-import { loadStripe } from '@stripe/stripe-js';
-import { useEffect } from 'react';
+import PaymentForm from '@/components/PaymentForm';
+import { RootState } from '@/redux/store';
+import Image from 'next/image';
+import React from 'react'
 import { useSelector } from 'react-redux';
 
-const Checkout = () => {
-    const totalAmount = useSelector(selectTotalAmount);
+const Page = () => {
 
-    useEffect(() => {
-        loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-    }, []);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
 
-    const onCheckout = async () => {
-        const res = await checkoutCredits(totalAmount);
-        console.log(res);
-        // 1. add name, addres, number to metadata of clerk
-        // 2. create a orders model
-        // 3. if the res is true add order into the orders collection
-        // 4. show the latest orders on the admin dashboard, client dashboard
-    };
+  return (
+    <div className='flex items-center justify-center gap-10'>
+      <div className='flex flex-col items-center justify-center'>
+        {
+          cartItems.map((i) => (
+            <div key={i._id} className='border-2 my-2 p-4'>
+              <Image src={i.image} height={150} width={150} alt='souths' />
+              <div className='flex flex-col justify-center gap-4 text-start'>
+                <h1> {i.title} </h1>
+                <p> Quantity : {i.quantity} </p>
+                <p> Price : {i.quantity * i.price} </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
 
-    return (
-        <div>
-            Total Amount: {totalAmount}
-            <form action={onCheckout} method='POST'>
-                <button type='submit'>submit</button>
-            </form>
-        </div>
-    );
-};
+      <PaymentForm />
 
-export default Checkout;
+    </div>
+  )
+
+}
+
+export default Page

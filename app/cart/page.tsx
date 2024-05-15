@@ -9,7 +9,7 @@ import Link from 'next/link';
 const MyNewPage = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
 
-    // console.log('Cart Items:', cartItems); // Log cartItems for debugging
+    console.log('Cart Items:', cartItems);
 
     if (!cartItems || cartItems.length === 0) {
         return <div className='flex w-full h-screen gap-4 font-bold text-xl items-center justify-center'><BsFillBasketFill size={50} /> No items in cart</div>;
