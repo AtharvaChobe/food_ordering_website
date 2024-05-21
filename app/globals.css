@@ -42,3 +42,4 @@ body, html{
 .auth button{
   @apply rounded bg-green-200 font-bold px-3 py-2 hover:shadow-md mt-4 w-1/3
 }
+

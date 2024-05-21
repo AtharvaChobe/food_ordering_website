@@ -30,7 +30,7 @@ const MyNewPage = () => {
                     </div>
                 </div>
             ))}
-            <Link href={"/checkout"}>Checkout</Link>
+            <Link className='mx-auto px-3 py-2 bg-black text-white rounded shadow hover:shadow-lg hover:rounded-md duration-200' href={"/checkout"}>Checkout</Link>
         </div>
     );
 };

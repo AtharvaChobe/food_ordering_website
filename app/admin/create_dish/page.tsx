@@ -68,7 +68,7 @@ const Page = () => {
 }
 
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center md:flex-row flex-col'>
       <AdminNav/>
     <div className='flex items-center justify-center w-full h-screen'>
       <form className='flex flex-col items-center justify-center p-4 rounded shadow-md bg-white gap-3' onSubmit={handleSubmit}>

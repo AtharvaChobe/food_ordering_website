@@ -4,6 +4,7 @@ import { useEdgeStore } from '@/lib/edgestore';
 import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -17,6 +18,7 @@ const Page = () => {
     // console.log(params.id)
     const { edgestore } = useEdgeStore();
     const {userId} = useAuth();
+    const router = useRouter();
 
     useEffect(() => {
         const a = async () => {
@@ -76,6 +78,8 @@ const Page = () => {
                 setTitle("");
                 setDetails("");
                 setPrice(0);
+                router.push("/admin/manage_menus")
+
             }
         } catch (error) {
             console.error('Error:', error);
@@ -90,7 +94,7 @@ const Page = () => {
     }
 
     return (
-        <div className='flex items-center justify-center'>
+        <div className='flex items-center justify-center md:flex-row flex-col'>
             <AdminNav />
             <div className='flex items-center justify-center w-full h-screen'>
                 <form className='flex flex-col items-center justify-center p-4 rounded shadow-md bg-white gap-3' onSubmit={handleSubmit}>
