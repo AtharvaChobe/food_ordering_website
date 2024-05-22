@@ -11,12 +11,14 @@ const Page = () => {
   const getOrders = async () => {
     const data = await axios.get("api/findOrders");
     setres(data.data);
-    // console.log(data);
+    // console.log(data.data);
   }
 
   useEffect(() => {
     getOrders()
   }, [])
+
+  // console.log(res)
 
   const changeStatus = async (id: any) => {
     // console.log(id);
