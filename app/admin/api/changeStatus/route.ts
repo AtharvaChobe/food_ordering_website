@@ -14,7 +14,7 @@ export async function PUT(req: any) {
             { completed: true },
             { new: true }
         );
-
+        
         return NextResponse.json(updatedOrder);
     } catch (error) {
         console.error(error);

@@ -21,10 +21,10 @@ const Page = () => {
   // console.log(res)
 
   const changeStatus = async (id: any) => {
-    // console.log(id);
+    console.log(id);
     const res = await axios.put(`api/changeStatus?id=${id}`);
     if (res.data) {
-      alert("Confirm?")
+      // alert("Confirm?")
       location.reload();
       toast.success("Edited status")
     }
