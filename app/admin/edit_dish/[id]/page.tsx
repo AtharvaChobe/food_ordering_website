@@ -15,7 +15,7 @@ const Page = () => {
     const [image, setimage] = useState("")
     const [file, setFile] = React.useState<File>();
     const params = useParams<{ id: string }>();
-    // console.log(params.id)
+    // console.log(params)
     const { edgestore } = useEdgeStore();
     const {userId} = useAuth();
     const router = useRouter();
@@ -23,12 +23,13 @@ const Page = () => {
     useEffect(() => {
         const a = async () => {
             try {
+                toast.loading("loading")
                 const res = await axios.get(`/admin/api/getDish?id=${params.id}`);
-                // console.log(res.data);
                 setTitle(res.data.title)
                 setDetails(res.data.details)
                 setPrice(res.data.price)
                 setimage(res.data.image)
+                toast.remove()
             } catch (error) {
                 console.log(error)
             }

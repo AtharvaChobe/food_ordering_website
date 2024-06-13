@@ -37,36 +37,37 @@ const Page = () => {
             <div className='flex items-center justify-center w-full h-screen font-bold text-2xl'>Not authorised!</div>
         )
     }
-    if (loading) {
-        return (
-            <Spinner />
-        )
-    }
-    else {
-        return (
-            <div className='flex w-full h-full md:flex-row flex-col'>
-                <AdminNav />
-                <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 h-full'>
-                    {data &&
-                        data.map((i: any) => (
-                            <>
-                                <div key={i._id} className='flex relative flex-col items-center justify-center h-[30rem] gap-3 bg-white rounded-md hover:shadow-md p-4 mx-5'>
-                                    <Image src={i.image} alt='souths' height={200} width={200} />
-                                    <h2 className='font-bold text-2xl'> {i.title} </h2>
-                                    <p className='text-sm text-slate-500'> {i.details} </p>
-                                    <div className='flex items-center absolute bottom-2 justify-around w-full'>
-                                        <span> ₹ {i.price} </span>
-                                        <DeleteDish id={i._id} />
-                                        <EditDish id={i._id} />
+
+    return (
+        <div className='flex w-full h-full md:flex-row flex-col'>
+            <AdminNav />
+            {
+                loading
+                    ?
+                    <Spinner />
+                    :
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 h-full'>
+                        {data &&
+                            data.map((i: any) => (
+                                <>
+                                    <div key={i._id} className='flex relative flex-col items-center justify-center h-[30rem] gap-3 bg-white rounded-md hover:shadow-md p-4 mx-5'>
+                                        <Image src={i.image} alt='souths' height={200} width={200} />
+                                        <h2 className='font-bold text-2xl'> {i.title} </h2>
+                                        <p className='text-sm text-slate-500'> {i.details} </p>
+                                        <div className='flex items-center absolute bottom-2 justify-around w-full'>
+                                            <span> ₹ {i.price} </span>
+                                            <DeleteDish id={i._id} />
+                                            <EditDish id={i._id} />
+                                        </div>
                                     </div>
-                                </div>
-                            </>
-                        ))
-                    }
-                </div>
-            </div>
-        );
-    }
+                                </>
+                            ))
+                        }
+                    </div>
+            }
+        </div>
+    );
+
 
 };
 

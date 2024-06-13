@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 
-
 const orderModel = new Schema({
     orderedBy: String,
     phone: String,
